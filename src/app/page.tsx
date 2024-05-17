@@ -1,44 +1,24 @@
-import { PhoneIcon } from '@heroicons/react/16/solid';
-import { ChevronDoubleDownIcon } from '@heroicons/react/16/solid';
-import Image from 'next/image';
-import SectionHeader from '@/app/ui/SectionHeader';
-import Link from 'next/link';
-import NavBar from '@/app/ui/Navbar';
-import Footer from './ui/Footer';
-import { Gluten } from 'next/font/google';
+import { PhoneIcon } from "@heroicons/react/16/solid";
+import { ChevronDoubleDownIcon } from "@heroicons/react/16/solid";
+import Image from "next/image";
+import SectionHeader from "@/app/ui/SectionHeader";
+import Link from "next/link";
+import Footer from "./ui/Footer";
+import { Gluten } from "next/font/google";
+import Header from "./ui/Header";
 
-const gluten = Gluten({ weight: '400', subsets: ['latin'] });
+const gluten = Gluten({ weight: "400", subsets: ["latin"] });
 
 export default function Page() {
   return (
     <>
-      {/* Navigation */}
-      <header className="w-full bg-white drop-shadow-lg">
-        <nav className="mx-auto max-w-screen-2xl px-0 md:px-16 2xl:px-0">
-          <div className="flex items-center space-x-4">
-            <div className="flex grow">
-              <a href="/" className="flex items-center">
-                <Image
-                  src="/images/tagparak-icon.png"
-                  alt="Tagparak Beachfront Resort"
-                  width={60}
-                  height={60}
-                />
-                <span className="hidden sm:block">
-                  Tagparak Beachfront Resort
-                </span>
-              </a>
-            </div>
-            <NavBar />
-          </div>
-        </nav>
-      </header>
-      <section className="heropattern-topography-yellow-200 Fmin-h-[calc(100vh_-_100px_-_60px)]">
+      <Header />
+      <section className="Fmin-h-[calc(100vh_-_100px_-_60px)] heropattern-topography-yellow-200">
         {/* Hero */}
         <section className="mx-auto grid h-screen max-w-screen-2xl sm:grid-cols-1 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 ">
           <div className="place-content-center">
             <h2 className="px-4 text-center text-[48px] font-bold uppercase sm:text-[56px] md:text-[64px] xl:px-16">
-              {'Beat the heat this '}
+              {"Beat the heat this "}
               <span
                 className={`text-yellow-300 sm:text-[64px] md:text-[84px] ${gluten.className}`}
               >
