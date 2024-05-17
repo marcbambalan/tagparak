@@ -23,7 +23,7 @@ export default function Footer() {
 
         <Link
           href="/login"
-          className="border border-transparent hover:border-b-black"
+          className="border border-transparent hover:border-b-slate-700"
         >
           Login
         </Link>
