@@ -6,6 +6,7 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
+  Transition,
 } from "@headlessui/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -77,21 +78,30 @@ export default function Header() {
               </DisclosureButton>
             </div>
 
-            <DisclosurePanel className="mx-auto max-w-screen-2xl items-center space-x-4 px-0 md:px-16 xl:hidden 2xl:px-0">
-              <div className="space-y-1 px-2 pb-3 pt-2">
-                {links.map((link) => (
-                  <DisclosureButton
-                    key={link.name}
-                    as="a"
-                    href={link.href}
-                    className="flex flex-col rounded-full px-4 py-2 hover:bg-yellow-300"
-                    aria-current={link.href === pathname ? "page" : undefined}
-                  >
-                    {link.name}
-                  </DisclosureButton>
-                ))}
-              </div>
-            </DisclosurePanel>
+            <Transition
+              enter="duration-200 ease-in origin-top"
+              enterFrom="opacity-0 -translate-y-2 scale-y-75"
+              enterTo="opacity-100 translate-y-0 scale-y-100"
+              leave="duration-200 ease-in origin-top"
+              leaveFrom="opacity-100 translate-y-0 scale-y-100"
+              leaveTo="opacity-0 -translate-y-2 scale-y-75"
+            >
+              <DisclosurePanel className="mx-auto max-w-screen-2xl items-center space-x-4 px-0 md:px-16 xl:hidden 2xl:px-0">
+                <div className="space-y-1 px-2 pb-3 pt-2">
+                  {links.map((link) => (
+                    <DisclosureButton
+                      key={link.name}
+                      as="a"
+                      href={link.href}
+                      className="flex flex-col rounded-full px-4 py-2 hover:bg-yellow-300"
+                      aria-current={link.href === pathname ? "page" : undefined}
+                    >
+                      {link.name}
+                    </DisclosureButton>
+                  ))}
+                </div>
+              </DisclosurePanel>
+            </Transition>
           </>
         )}
       </Disclosure>
