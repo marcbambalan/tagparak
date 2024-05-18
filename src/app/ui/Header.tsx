@@ -1,17 +1,17 @@
 "use client";
 
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
-
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
   Transition,
 } from "@headlessui/react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
+
 import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
   {

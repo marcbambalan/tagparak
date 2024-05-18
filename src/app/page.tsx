@@ -1,10 +1,10 @@
 import { PhoneIcon } from "@heroicons/react/16/solid";
 import { ChevronDoubleDownIcon } from "@heroicons/react/16/solid";
-import Image from "next/image";
-import SectionHeader from "@/app/ui/SectionHeader";
-import Link from "next/link";
-import Footer from "./ui/Footer";
 import { Gluten } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import SectionHeader from "@/app/ui/SectionHeader";
+import Footer from "./ui/Footer";
 import Header from "./ui/Header";
 
 const gluten = Gluten({ weight: "400", subsets: ["latin"] });
