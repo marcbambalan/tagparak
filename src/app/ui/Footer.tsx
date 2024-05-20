@@ -1,10 +1,10 @@
-import { SiFacebook } from '@icons-pack/react-simple-icons';
-import Link from 'next/link';
+import { SiFacebook } from "@icons-pack/react-simple-icons";
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <div className="h-[200px] w-full bg-yellow-300 px-16 py-4 md:h-[100px]">
-      <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col items-center justify-between md:flex-row text-slate-800 hover:text-slate-700 text-center">
+      <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col items-center justify-between text-center text-slate-800 hover:text-slate-700 md:flex-row">
         <div className="flex items-center gap-4">
           {/* Facebook */}
           <a href="https://www.facebook.com/tagparak.bfr/">
@@ -23,7 +23,7 @@ export default function Footer() {
 
         <Link
           href="/login"
-          className="border border-transparent hover:border-b-slate-700"
+          className="border border-transparent hover:underline"
         >
           Login
         </Link>

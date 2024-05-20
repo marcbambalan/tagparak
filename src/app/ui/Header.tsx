@@ -56,7 +56,7 @@ export default function Header() {
                     href={link.href}
                     aria-current={link.href === pathname ? "page" : undefined}
                     className={clsx(
-                      "hover:text-color-300 hidden border-2 border-transparent bg-white px-4 py-2 xl:block",
+                      "hidden border-2 border-transparent bg-white px-4 py-2 xl:block",
                       {
                         "font-bold": pathname === link.href,
                       },
