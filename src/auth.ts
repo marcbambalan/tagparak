@@ -6,9 +6,10 @@ import { z } from "zod";
 import { User } from "@/app/lib/definitions";
 import { authConfig } from "./auth.config";
 
-const getUser = async (email: string): Promise<User | undefined> => {
+const getUser = async (username: string): Promise<User | undefined> => {
   try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
+    const user =
+      await sql<User>`SELECT * FROM users WHERE username=${username}`;
     return user.rows[0];
   } catch (error) {
     console.error("Failed to fetch user: ", error);
@@ -22,13 +23,13 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
+          .object({ username: z.string(), password: z.string().min(6) })
           .safeParse(credentials);
 
         if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
+          const { username, password } = parsedCredentials.data;
 
-          const user = await getUser(email);
+          const user = await getUser(username);
 
           if (!user) {
             return null;

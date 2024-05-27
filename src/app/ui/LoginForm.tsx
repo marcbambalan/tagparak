@@ -2,9 +2,8 @@
 
 import { Button, Field, Fieldset, Label } from "@headlessui/react";
 import { ExclamationCircleIcon } from "@heroicons/react/16/solid";
-import clsx from "clsx";
 import Image from "next/image";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
 import SectionHeader from "@/app/ui/SectionHeader";
 
@@ -56,16 +55,24 @@ export default function LoginForm() {
             {errorMessage}
           </span>
         )}
-        <Button
-          type="submit"
-          className={clsx(
-            "w-full rounded-full bg-yellow-300 p-2 hover:bg-yellow-200",
-            errorMessage ? "mt-2" : "mt-4",
-          )}
-        >
-          Sign in
-        </Button>
+        <div className={errorMessage ? "mt-2" : "mt-4"}>
+          <LoginButton />
+        </div>
       </form>
     </div>
   );
 }
+
+const LoginButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      type="submit"
+      className="w-full rounded-full bg-yellow-300 p-2 hover:bg-yellow-200"
+      aria-disabled={pending}
+    >
+      Sign in
+    </Button>
+  );
+};
