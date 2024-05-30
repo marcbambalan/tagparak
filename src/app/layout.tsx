@@ -1,3 +1,4 @@
+import { PopoverGroup } from "@headlessui/react";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import React from "react";
@@ -18,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={nunito.className}>{children}</body>
+      <body className={nunito.className}>
+        {/**
+         * PopoverGroup is added here so that popovers close on outside click.
+         */}
+        <PopoverGroup>{children}</PopoverGroup>
+      </body>
     </html>
   );
 }
