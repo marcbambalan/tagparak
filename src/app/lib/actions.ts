@@ -8,7 +8,14 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    await signIn("credentials", formData);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    await signIn("credentials", {
+      username,
+      password,
+      redirectTo: "/users",
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
