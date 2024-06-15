@@ -2,6 +2,7 @@
 
 import { Button, Field, Fieldset, Label } from "@headlessui/react";
 import { ExclamationCircleIcon } from "@heroicons/react/16/solid";
+import { LifebuoyIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
@@ -71,8 +72,16 @@ const LoginButton = () => {
       type="submit"
       className="w-full rounded-full bg-yellow-300 p-2 hover:bg-yellow-200"
       aria-disabled={pending}
+      disabled={pending}
     >
-      Sign in
+      {pending ? (
+        <div className="flex items-center justify-center">
+          <LifebuoyIcon className="size-6 animate-spin" />
+          <span>Signing in...</span>
+        </div>
+      ) : (
+        "Sign in"
+      )}
     </Button>
   );
 };
