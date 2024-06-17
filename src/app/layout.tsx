@@ -2,9 +2,10 @@ import { PopoverGroup } from "@headlessui/react";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import React from "react";
+import "devextreme/dist/css/dx.fluent.saas.light.css";
 import "./globals.css";
 
-const nunito = Nunito({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
 
 export const metadata: Metadata = {
   title: "Tagparak Beachfront Resort",
