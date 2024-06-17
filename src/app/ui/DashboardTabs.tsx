@@ -53,7 +53,7 @@ export default function DashboardTabs() {
           </ListboxButton>
           <ListboxOptions
             anchor="bottom"
-            className="mt-2 w-[calc(100vw_-_2rem)] bg-white drop-shadow-lg"
+            className="z-50 mt-2 w-[calc(100vw_-_2rem)] bg-white drop-shadow-lg"
           >
             {tabs.map((tab) => (
               <ListboxOption
