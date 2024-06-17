@@ -1,5 +1,7 @@
 "use server";
 
+import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 import { AuthError } from "next-auth";
 import { signIn, signOut } from "@/auth";
 
@@ -31,4 +33,19 @@ export async function authenticate(
 
 export async function logout() {
   await signOut();
+}
+
+export async function fetchUsers() {
+  noStore();
+
+  try {
+    const data = await sql`
+      SELECT * FROM users
+    `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch users.");
+  }
 }
