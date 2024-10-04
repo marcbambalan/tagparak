@@ -49,3 +49,19 @@ export async function fetchUsers() {
     throw new Error("Failed to fetch users.");
   }
 }
+
+export async function fetchRentals() {
+  noStore();
+
+  try {
+    const data = await sql`
+      SELECT * FROM rental
+    `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch rentals.");
+  }
+}
+
