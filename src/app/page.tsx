@@ -6,6 +6,7 @@ import Link from "next/link";
 import SectionHeader from "@/app/ui/SectionHeader";
 import Footer from "./ui/Footer";
 import Header from "./ui/Header";
+import VisitUs from "./ui/VisitUs";
 
 const gluten = Gluten({ weight: "400", subsets: ["latin"] });
 
@@ -13,7 +14,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <section className="Fmin-h-[calc(100vh_-_100px_-_60px)] heropattern-topography-yellow-200">
+      <section className="min-h-[calc(100vh_-_100px_-_60px)] heropattern-topography-yellow-200">
         {/* Hero */}
         <section className="mx-auto grid h-screen max-w-screen-2xl sm:grid-cols-1 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 ">
           <div className="place-content-center">
@@ -64,32 +65,7 @@ export default function Page() {
         </section>
 
         {/* Visit us */}
-        <section className="mx-auto grid max-w-screen-2xl sm:grid-cols-1 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 md:py-8 xl:px-0">
-          <div className="h-[500px] w-full animate-pulse bg-slate-300">
-            <span className="text-slate-400">Embed Google maps here</span>
-          </div>
-          <div
-            id="visit-us"
-            className="order-first flex flex-col items-center justify-center md:order-last"
-          >
-            <SectionHeader text="Visit us!" />
-            <div className="max-w-[500px] px-6">
-              <div className="flex flex-col pb-6">
-                <span className="p-2 font-black uppercase">Address</span>
-                <span className="p-2">
-                  Sitio Bagotayoc, Brgy. Lohong, Ragay, Philippines, 4410
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="p-2 font-black uppercase ">
-                  Mobile numbers
-                </span>
-                <span className="p-2">Elena Quindoza - 09494343421</span>
-                <span className="p-2">Enrico Sales - 09228552247</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <VisitUs mapHeight={500} />
       </section>
       <Footer />
     </>
