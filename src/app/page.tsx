@@ -7,10 +7,13 @@ import SectionHeader from "@/app/ui/SectionHeader";
 import Footer from "./ui/Footer";
 import Header from "./ui/Header";
 import VisitUs from "./ui/VisitUs";
+import AmenitiesTileView from "./ui/AmenitiesTileView";
+import { fetchAmenities } from "./lib/actions";
 
 const gluten = Gluten({ weight: "400", subsets: ["latin"] });
 
-export default function Page() {
+export default async function Page() {
+  const amenities = await fetchAmenities();
   return (
     <>
       <Header />
@@ -59,9 +62,7 @@ export default function Page() {
           className="mx-auto flex min-h-screen max-w-screen-2xl flex-col px-0 py-8 xl:px-0"
         >
           <SectionHeader text="amenities" />
-          <div className="w-full grow animate-pulse bg-slate-300">
-            <span className=" text-slate-400">Insert amenities here</span>
-          </div>
+          <AmenitiesTileView amenities={amenities} height="100%" />
         </section>
 
         {/* Visit us */}
