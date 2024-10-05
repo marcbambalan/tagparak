@@ -66,6 +66,22 @@ export async function fetchRentals() {
   }
 }
 
+// TODO: Refactor. Consolidate get all rows for a table.
+export async function fetchAmenities() {
+  noStore();
+
+  try {
+    const data = await sql`
+      SELECT * FROM amenity
+    `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch amenities.");
+  }
+}
+
 export async function submitContactForm(
   prevState: string | undefined,
   formData: FormData,
