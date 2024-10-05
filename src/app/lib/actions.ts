@@ -3,6 +3,7 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import { AuthError } from "next-auth";
+import { z } from "zod";
 import { signIn, signOut } from "@/auth";
 
 export async function authenticate(
@@ -65,3 +66,54 @@ export async function fetchRentals() {
   }
 }
 
+export async function submitContactForm(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const contact = formData.get("contact");
+    const message = formData.get("message");
+
+    const parsedFormData = z
+      .object({
+        fullName: z
+          .string()
+          .min(3, { message: "Full name must contain at least 3 characters." }),
+        email: z.string().email({ message: "Email is invalid." }),
+        contact: z
+          .string()
+          .regex(
+            new RegExp(/^09\d{9}$/),
+            "Contact number is invalid. Use the 09XXXXXXXXX format.",
+          ),
+        message: z
+          .string()
+          .min(3, { message: "Message must contain at least 3 characters." }),
+      })
+      .safeParse({
+        fullName,
+        email,
+        contact,
+        message,
+      });
+
+    if (parsedFormData.success) {
+      const { fullName, email, contact, message } = parsedFormData.data;
+
+      await sql`
+        INSERT INTO message (name, email, contact, message)
+        VALUES (${fullName}, ${email}, ${contact}, ${message})
+      `;
+    }
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return error.issues.map((issue) => issue.message).join(", ");
+    }
+
+    return "Something went wrong.";
+  } finally {
+    return "success";
+  }
+}
