@@ -19,6 +19,7 @@ export default function Page() {
             alt="Tagparak Beachfront Resort"
             fill
             className="object-cover"
+            loading="eager"
           />
         </div>
       </div>
