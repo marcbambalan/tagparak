@@ -4,11 +4,11 @@ import { Gluten } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "@/app/ui/SectionHeader";
+import { fetchAmenities } from "./lib/actions";
+import AmenitiesTileView from "./ui/AmenitiesTileView";
 import Footer from "./ui/Footer";
 import Header from "./ui/Header";
 import VisitUs from "./ui/VisitUs";
-import AmenitiesTileView from "./ui/AmenitiesTileView";
-import { fetchAmenities } from "./lib/actions";
 
 const gluten = Gluten({ weight: "400", subsets: ["latin"] });
 
@@ -52,6 +52,7 @@ export default async function Page() {
               alt="Tagparak Beachfront Resort"
               fill
               className="object-cover"
+              loading="eager"
             />
           </div>
         </section>
