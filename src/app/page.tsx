@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <>
       <Header />
-      <section className="min-h-[calc(100vh_-_100px_-_60px)] pt-[60px] heropattern-topography-yellow-200">
+      <section className="flex min-h-[calc(100vh_-_100px_-_60px)] flex-col items-stretch pt-[60px] heropattern-topography-yellow-200">
         {/* Hero */}
         <HeroCover />
 
@@ -25,7 +25,9 @@ export default async function Page() {
         </section>
 
         {/* Visit us */}
-        <VisitUs mapHeight={500} />
+        <div className="mx-auto max-w-screen-2xl px-0 py-8 md:px-16 2xl:px-0">
+          <VisitUs mapHeight={500} />
+        </div>
       </section>
       <Footer />
     </>
