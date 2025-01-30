@@ -9,7 +9,7 @@ const VisitUs = ({ mapHeight }: { mapHeight: number }) => {
   return (
     <section className="grid max-w-screen-2xl sm:grid-cols-1 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 md:py-8 xl:px-0">
       <div className="relative">
-        <div className="absolute w-full">
+        <div className="absolute top-0 z-0 w-full">
           <Skeleton height={mapHeight} />
         </div>
         <iframe
@@ -19,7 +19,7 @@ const VisitUs = ({ mapHeight }: { mapHeight: number }) => {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="absolute"
+          className="relative z-10"
         ></iframe>
       </div>
       <div
