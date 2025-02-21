@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <div className="mx-auto h-full max-w-screen-2xl px-0 py-8 md:px-0 2xl:px-0">
       <SectionHeader text="amenities" />
-      <AmenitiesTileView amenities={amenities} height={670} />
+      <AmenitiesTileView amenities={amenities} />
     </div>
   );
 }
