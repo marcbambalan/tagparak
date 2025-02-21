@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SectionHeader from "@/app/ui/SectionHeader";
 import { fetchAmenities } from "./lib/actions";
-import AmenitiesTileView from "./ui/AmenitiesTileView";
+import AmenitiesCarousel from "./ui/AmenitiesCarousel";
 import Footer from "./ui/Footer";
 import Header from "./ui/Header";
 import HeroCover from "./ui/HeroCover";
@@ -19,7 +19,7 @@ export default async function Page() {
         {/* Amenities */}
         <section
           id="amenities"
-          className="flex min-h-dvh w-full flex-col items-center gap-4 bg-yellow-300 py-8 heropattern-topography-yellow-200"
+          className="flex w-full flex-col items-center gap-4 bg-yellow-300 py-8 heropattern-topography-yellow-200"
         >
           <Image
             src="/icons/beach.svg"
@@ -29,7 +29,7 @@ export default async function Page() {
           />
           <span>Bagotayok, Ragay | Philippines</span>
           <SectionHeader text="Tagparak Beachfront Resort" />
-          <AmenitiesTileView amenities={amenities} />
+          <AmenitiesCarousel amenities={amenities} />
         </section>
 
         {/* Visit us */}
