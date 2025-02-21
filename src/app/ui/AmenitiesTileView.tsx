@@ -1,74 +1,76 @@
 "use client";
 
 import { QueryResultRow } from "@vercel/postgres";
-import { TileView } from "devextreme-react";
-import { ContentReadyEvent } from "devextreme/ui/tile_view";
-import { useCallback, useMemo } from "react";
+import clsx from "clsx";
+import { useEffect, useState } from "react";
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-const AmenityImage = (amenity: QueryResultRow) => (
-  <div
-    className="group block flex h-full w-full items-center justify-center bg-cover bg-cover bg-center bg-blend-normal transition ease-in-out hover:bg-yellow-600 hover:bg-blend-darken"
-    style={{
-      backgroundImage: `url(${amenity.imgsrc})`,
-    }}
-  >
-    <div className="max-w-[240px]">
-      <span className="mb-2 hidden rounded-full bg-yellow-300 p-2 px-4 text-center group-hover:block">
-        {amenity.name}
-      </span>
+const AmenitiesTileView = ({ amenities }: { amenities: QueryResultRow[] }) => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
-      <div className="hidden text-center text-white group-hover:block">
-        {amenity.description}
-      </div>
-    </div>
-  </div>
-);
-
-const AmenitiesTileView = ({
-  amenities,
-  height,
-}: {
-  amenities: QueryResultRow[];
-  height: number | string;
-}) => {
-  const shapeData = useMemo(
-    () =>
-      amenities.map((amenity) => ({
-        ...amenity,
-        heightRatio: amenity.height_ratio,
-        widthRatio: 1,
-      })),
-    [screen.width],
-  );
-
-  // Change baseItemWidth based on the window's width
-  const handleContentReady = useCallback((e: ContentReadyEvent) => {
-    let baseItemWidth = 760;
-
-    if (window.innerWidth < 768) {
-      baseItemWidth = window.innerWidth;
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
     }
 
-    if (window.innerWidth >= 768 && window.innerWidth < 1536) {
-      baseItemWidth = window.innerWidth / 2 - 10;
-    }
+    const updateCarouselState = () => {
+      setCurrentIndex(carouselApi.selectedScrollSnap());
+      setTotalItems(carouselApi.scrollSnapList().length);
+    };
 
-    e.component.option({
-      baseItemWidth,
-    });
-  }, []);
+    updateCarouselState();
+
+    carouselApi.on("select", updateCarouselState);
+
+    return () => {
+      carouselApi.off("select", updateCarouselState);
+    };
+  }, [carouselApi]);
+
+  const scrollToIndex = (index: number) => {
+    carouselApi?.scrollTo(index);
+  };
 
   return (
-    <TileView
-      items={shapeData}
-      itemRender={AmenityImage}
-      width="100%"
-      height={height}
-      baseItemHeight={240}
-      itemMargin={0}
-      direction="vertical"
-      onContentReady={handleContentReady}
-    />
+    <div className="relative mx-2 my-auto self-stretch">
+      <Carousel opts={{ loop: true }} setApi={setCarouselApi}>
+        <CarouselContent>
+          {amenities.map(({ id, description, imgsrc }) => (
+            <CarouselItem key={id} className="md:basis-1/3">
+              <img
+                src={imgsrc}
+                alt={description}
+                className="aspect-square h-full w-full rounded-[12px] bg-yellow-100 object-cover"
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="left-[12px]" />
+        <CarouselNext className="right-[12px]" />
+      </Carousel>
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center space-x-2">
+        {Array.from({ length: totalItems }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollToIndex(index)}
+            className={clsx("h-3 w-3 rounded-full bg-white drop-shadow-lg", {
+              "bg-yellow-300": currentIndex == index,
+            })}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
