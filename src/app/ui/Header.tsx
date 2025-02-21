@@ -30,7 +30,7 @@ export default function Header() {
     <>
       <Disclosure
         as="nav"
-        className="absolute z-10 w-full bg-white drop-shadow-lg"
+        className="absolute z-50 w-full bg-white drop-shadow-lg"
       >
         {({ open }) => (
           <>
