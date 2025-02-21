@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const AmenitiesTileView = ({ amenities }: { amenities: QueryResultRow[] }) => {
+const AmenitiesCarousel = ({ amenities }: { amenities: QueryResultRow[] }) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -44,13 +44,18 @@ const AmenitiesTileView = ({ amenities }: { amenities: QueryResultRow[] }) => {
     <div className="relative mx-2 my-auto self-stretch">
       <Carousel opts={{ loop: true }} setApi={setCarouselApi}>
         <CarouselContent>
-          {amenities.map(({ id, description, imgsrc }) => (
+          {amenities.map(({ id, description, imgsrc }, index) => (
             <CarouselItem key={id} className="md:basis-1/3">
-              <img
-                src={imgsrc}
-                alt={description}
-                className="aspect-square h-full w-full rounded-[12px] bg-yellow-100 object-cover"
-              />
+              <div className="rounded-[12px] bg-black">
+                <img
+                  src={imgsrc}
+                  alt={description}
+                  className={clsx(
+                    "aspect-square h-full w-full rounded-[12px] bg-yellow-100 object-cover",
+                    `${currentIndex === index ? "opacity-100 transition-opacity duration-700" : "opacity-50"}`,
+                  )}
+                />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -74,4 +79,4 @@ const AmenitiesTileView = ({ amenities }: { amenities: QueryResultRow[] }) => {
   );
 };
 
-export default AmenitiesTileView;
+export default AmenitiesCarousel;

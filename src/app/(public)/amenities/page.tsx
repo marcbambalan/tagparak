@@ -1,5 +1,5 @@
 import { fetchAmenities } from "@/app/lib/actions";
-import AmenitiesTileView from "@/app/ui/AmenitiesTileView";
+import AmenitiesCarousel from "@/app/ui/AmenitiesCarousel";
 import SectionHeader from "@/app/ui/SectionHeader";
 
 export default async function Page() {
@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <div className="mx-auto h-full max-w-screen-2xl px-0 py-8 md:px-0 2xl:px-0">
       <SectionHeader text="amenities" />
-      <AmenitiesTileView amenities={amenities} />
+      <AmenitiesCarousel amenities={amenities} />
     </div>
   );
 }
