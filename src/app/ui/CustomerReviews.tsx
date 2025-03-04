@@ -11,6 +11,12 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import SectionHeader from "./SectionHeader";
 import useCarousel from "../hooks/useCarousel";
 
@@ -62,9 +68,21 @@ const CustomerReviews = ({ reviews }: { reviews: QueryResultRow[] }) => {
                         />
                       ))}
                     </span>
-                    <p className="customer-review-comment line-clamp-4">
-                      {comment}
-                    </p>
+
+                    {/* User comment */}
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <p className="customer-review-comment line-clamp-4">
+                            {comment}
+                          </p>
+                        </TooltipTrigger>
+                        <TooltipContent className="w-full max-w-[90vw] md:max-w-[600px]">
+                          <p>{comment}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+
                     <div className="user-container self-end">
                       {review_url ? (
                         <Link
