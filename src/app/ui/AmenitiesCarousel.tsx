@@ -2,43 +2,18 @@
 
 import { QueryResultRow } from "@vercel/postgres";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
 import {
   Carousel,
-  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import useCarousel from "../hooks/useCarousel";
 
 const AmenitiesCarousel = ({ amenities }: { amenities: QueryResultRow[] }) => {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
-
-  useEffect(() => {
-    if (!carouselApi) {
-      return;
-    }
-
-    const updateCarouselState = () => {
-      setCurrentIndex(carouselApi.selectedScrollSnap());
-      setTotalItems(carouselApi.scrollSnapList().length);
-    };
-
-    updateCarouselState();
-
-    carouselApi.on("select", updateCarouselState);
-
-    return () => {
-      carouselApi.off("select", updateCarouselState);
-    };
-  }, [carouselApi]);
-
-  const scrollToIndex = (index: number) => {
-    carouselApi?.scrollTo(index);
-  };
+  const { totalItems, currentIndex, setCarouselApi, scrollToIndex } =
+    useCarousel();
 
   return (
     <div className="relative mx-2 my-auto self-stretch">
@@ -46,15 +21,25 @@ const AmenitiesCarousel = ({ amenities }: { amenities: QueryResultRow[] }) => {
         <CarouselContent>
           {amenities.map(({ id, description, imgsrc }, index) => (
             <CarouselItem key={id} className="md:basis-1/3">
-              <div className="rounded-[12px] bg-black">
-                <img
-                  src={imgsrc}
-                  alt={description}
-                  className={clsx(
-                    "aspect-square h-full w-full rounded-[12px] bg-yellow-100 object-cover",
-                    `${currentIndex === index ? "opacity-100 transition-opacity duration-700" : "opacity-50"}`,
-                  )}
-                />
+              <div
+                className={clsx(
+                  "rounded-[12px] bg-black transition-transform duration-700",
+                  {
+                    "scale-y-95": currentIndex !== index,
+                  },
+                )}
+              >
+                {
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imgsrc}
+                    alt={description}
+                    className={clsx(
+                      "aspect-square h-full w-full rounded-[12px] bg-yellow-100 object-cover",
+                      `${currentIndex === index ? "opacity-100 transition-opacity duration-700" : "opacity-50"}`,
+                    )}
+                  />
+                }
               </div>
             </CarouselItem>
           ))}
