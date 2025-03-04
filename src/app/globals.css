@@ -32,6 +32,10 @@ html {
   height: calc(100vh - 60px - 75px - 20px);
 }
 
+.yellow-filter {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(44%) saturate(5286%) hue-rotate(9deg) brightness(104%) contrast(103%);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
