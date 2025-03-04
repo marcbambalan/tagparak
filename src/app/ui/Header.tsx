@@ -18,7 +18,7 @@ const links = [
     name: "Home",
     href: "/",
   },
-  { name: "Amenities", href: "/amenities" },
+  // { name: "Amenities", href: "/amenities" },
   { name: "Rentals", href: "/rentals" },
   { name: "Location", href: "/location" },
   { name: "Contact", href: "/contact" },
