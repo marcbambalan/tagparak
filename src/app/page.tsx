@@ -39,7 +39,7 @@ export default async function Page() {
 
         {/* Customer Reviews */}
         <section id="reviews" className="relative min-h-dvh w-full bg-blue-400">
-          <div className="inset-shadow-[800px_0_100px_0_oklch(0.623 0.214 259.815)] max-h-dvh min-h-dvh w-full bg-[url('/images/tagparak-customer-reviews-background.jpg')] bg-cover bg-[center_70%]"></div>
+          <div className="absolute bottom-0 left-0 left-0 right-0 top-0 top-0 m-auto min-h-dvh bg-[url('/images/tagparak-customer-reviews-background.jpg')] bg-cover bg-[center_70%]"></div>
           <CustomerReviews reviews={reviews} />
         </section>
 

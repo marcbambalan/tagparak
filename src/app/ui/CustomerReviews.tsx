@@ -33,8 +33,8 @@ const CustomerReviews = ({ reviews }: { reviews: QueryResultRow[] }) => {
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 top-0 z-10 m-auto flex items-center justify-center lg:right-1/3">
-      <div className="aspect-3/2 flex max-h-full max-w-full flex-col items-center justify-center gap-2 bg-white bg-opacity-50 p-6 lg:max-h-[50%] lg:max-w-[60%]">
+    <div className="relative min-h-dvh">
+      <div className="flex h-full min-h-dvh flex-col items-center justify-center gap-2 bg-white bg-opacity-50 p-6 xl:absolute xl:left-[20%] xl:top-1/2 xl:aspect-[3/2] xl:max-h-[50%] xl:min-h-0 xl:-translate-y-[50%]">
         <Image
           src="/icons/review.svg"
           alt="Tagparak - beach icon"
