@@ -73,6 +73,7 @@ export async function fetchAmenities() {
   try {
     const data = await sql`
       SELECT * FROM amenity
+      WHERE hidden IS FALSE
     `;
 
     return data.rows;

@@ -49,7 +49,7 @@ const AmenitiesCarousel = ({ amenities }: { amenities: QueryResultRow[] }) => {
       </Carousel>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center space-x-2">
+      <div className="absolute bottom-4 left-0 right-0 z-10 flex justify-center space-x-2">
         {Array.from({ length: totalItems }).map((_, index) => (
           <button
             key={index}
